@@ -3,6 +3,10 @@ import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookie from "cookie-universal";
 
+
+export type forgotPasswordInput = {
+  email: string;
+}
 // login
 export type LoginInputs = {
   username: string;

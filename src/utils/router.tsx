@@ -11,6 +11,7 @@ import Organization from "../pages/organizations";
 import User from "../pages/Users";
 import Logout from "../pages/Logout";
 import Setting from "../pages/Settings";
+import ForgetPassword from "../pages/auth/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgetPassword />,
   },
 ]);
 
