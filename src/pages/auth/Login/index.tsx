@@ -2,7 +2,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginInputs, useLogin } from "../../../api/auth";
 import { Link } from "react-router-dom";
 import avatarSvg from "../../../assets/undraw_success-factors_i417.svg";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useState } from "react";
 function Login() {
+
+  const [showPassword, setShowPassword] = useState(false);
+
   const { register, handleSubmit } = useForm<LoginInputs>();
   const { mutate: login, isLoading: loading, error } = useLogin();
 
@@ -39,21 +44,29 @@ function Login() {
                   {...register("username")}
                   className="block w-full rounded-md border text-gray-950 border-gray-300 px-2 py-3 focus:outline-none focus:ring-sky-500 sm:text-sm"
                   autoComplete="new-name"
-                  placeholder="email"
+                  placeholder="email@example.com"
                 />
               </div>
 
               <label className="block text-left text-sm font-medium text-gray-700">
                 Password
               </label>
-              <div className="mt-1">
+              <div className="mt-1 relative">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  className="block w-full rounded-md border text-gray-950 border-gray-300 px-2 py-3 focus:outline-none focus:ring-sky-500 sm:text-sm"
-                  placeholder="password"
+                  className="block w-full rounded-md border text-gray-950 border-gray-300 px-2 py-3 pr-10 focus:outline-none focus:ring-sky-500 sm:text-sm"
+                  placeholder="• • • • • • • •"
                   autoComplete="new-password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 cursor-pointer top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
+                </button>
               </div>
 
               <div className="mt-2 text-right">
