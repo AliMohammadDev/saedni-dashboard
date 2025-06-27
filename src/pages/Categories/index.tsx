@@ -27,9 +27,9 @@ const Category = () => {
     <div className="px-4 md:px-8 py-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-3xl font-bold text-green-600">Product Categories</h2>
+          <h2 className="text-3xl font-bold text-green-600">Categories</h2>
           <p className="text-sm text-gray-500 mt-1">
-            Manage all food categories available in the restaurant.
+            Manage all categories available.
           </p>
         </div>
         <button

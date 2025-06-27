@@ -36,7 +36,7 @@ const EditCategoryModal = ({ category }: Props) => {
     <dialog className="edit-category-modal modal">
       <div className="modal-box bg-white rounded-2xl shadow-lg w-full max-w-md border border-orange-200">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-orange-600">Update Category</h3>
+          <h3 className="text-lg font-semibold text-green-600">Update Category</h3>
           <form method="dialog">
             <button className="text-xl text-gray-400 cursor-pointer hover:text-red-500 focus:outline-none">
               ×
@@ -51,7 +51,7 @@ const EditCategoryModal = ({ category }: Props) => {
             <input
               type="text"
               placeholder="Enter category name"
-              className="input input-bordered w-full border-orange-300 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-400"
+              className="input input-success w-full bg-white text-gray-950"
               required
               {...register("name", { required: true })}
 
@@ -64,7 +64,7 @@ const EditCategoryModal = ({ category }: Props) => {
               type="file"
               {...register("image")}
               accept="image/*"
-              className="file-input w-full file-input-bordered file-input-warning text-brown-700 bg-orange-50 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-400"
+              className="file-input file-input-success  w-full file-input-bordered  text-brown-700 bg-white text-gray-950 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-400"
             />
             {category?.image && typeof category.image === "string" && (
               <img
@@ -81,7 +81,7 @@ const EditCategoryModal = ({ category }: Props) => {
           <div className="flex justify-end pt-2">
             <button
               type="submit"
-              className="btn bg-orange-500 hover:bg-orange-600 text-white font-semibold"
+              className="btn btn-success shadow-md transition duration-300 ease-in-out  hover:scale-105 text-white font-semibold"
             >
               {isLoading ? "Updating..." : "Update Category"}
             </button>
