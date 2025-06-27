@@ -61,12 +61,12 @@ const Drawer = ({ children }: { children: ReactNode }) => {
               }}
               className={({ isActive }) =>
                 clsx(
-                  "flex w-full items-center  gap-2 rounded p-2 hover:bg-green-100",
-                  isActive ? "bg-green-200" : "",
+                  "flex w-full items-center  gap-2 rounded p-2 hover:bg-green-200",
+                  isActive ? "bg-green-400" : "",
                 )
               }
             >
-              {item.icon} <span className="block">{item.name}</span>
+              {item.icon} <span className="block text-gray-950">{item.name}</span>
             </NavLink>
           ))}
         </div>

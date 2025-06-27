@@ -37,7 +37,7 @@ function Login() {
                 <input
                   type="text"
                   {...register("username")}
-                  className="block w-full rounded-md border border-gray-300 px-2 py-3 focus:outline-none focus:ring-sky-500 sm:text-sm"
+                  className="block w-full rounded-md border text-gray-950 border-gray-300 px-2 py-3 focus:outline-none focus:ring-sky-500 sm:text-sm"
                   autoComplete="new-name"
                   placeholder="email"
                 />
@@ -50,7 +50,7 @@ function Login() {
                 <input
                   type="password"
                   {...register("password")}
-                  className="block w-full rounded-md border border-gray-300 px-2 py-3 focus:outline-none focus:ring-sky-500 sm:text-sm"
+                  className="block w-full rounded-md border text-gray-950 border-gray-300 px-2 py-3 focus:outline-none focus:ring-sky-500 sm:text-sm"
                   placeholder="password"
                   autoComplete="new-password"
                 />

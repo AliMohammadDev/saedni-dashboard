@@ -25,7 +25,7 @@ function Register() {
             <input
               type="text"
               {...register("username")}
-              className="block w-full rounded-md border border-gray-300 px-2 py-3 focus:outline-none focus:ring-green-600 sm:text-sm"
+              className="block w-full rounded-md  text-gray-950 border border-gray-300 px-2 py-3 focus:outline-none focus:ring-green-600 sm:text-sm"
               autoComplete="new-name"
               placeholder="name"
             />
@@ -34,7 +34,7 @@ function Register() {
             <input
               type="email"
               {...register("email")}
-              className="block w-full rounded-md border border-gray-300 px-2 py-3 focus:outline-none focus:ring-green-600 sm:text-sm"
+              className="block w-full rounded-md border text-gray-950 border-gray-300 px-2 py-3 focus:outline-none focus:ring-green-600 sm:text-sm"
               autoComplete="email"
               placeholder="email"
             />
@@ -43,13 +43,13 @@ function Register() {
             <input
               type="password"
               {...register("password")}
-              className="block w-full rounded-md border border-gray-300 px-2 py-3 focus:outline-none focus:ring-green-600 sm:text-sm"
+              className="block w-full rounded-md border text-gray-950 border-gray-300 px-2 py-3 focus:outline-none focus:ring-green-600 sm:text-sm"
               placeholder="password"
               autoComplete="new-password"
             />
 
             <div className="mt-5 flex items-center">
-              <input id="terms" type="checkbox" className="mr-2 h-4 w-4" />
+              <input id="terms" type="checkbox"  className="mr-2 h-4 w-4" />
               <label htmlFor="terms" className="text-sm text-gray-700">
                 I agree to the{" "}
                 <a href="/terms" className="underline text-blue-600">Terms and Conditions</a>

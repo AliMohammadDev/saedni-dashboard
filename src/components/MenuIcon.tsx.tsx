@@ -7,7 +7,7 @@ const MenuIcon: FC<React.SVGProps<SVGSVGElement>> = ({ ...other }) => {
       height="20px"
       viewBox="0 -960 960 960"
       width="20px"
-      fill="currentColor"
+      fill="green"
       {...other}
     >
       <path d="M140-254.62v-59.99h680v59.99H140ZM140-450v-60h680v60H140Zm0-195.39v-59.99h680v59.99H140Z" />

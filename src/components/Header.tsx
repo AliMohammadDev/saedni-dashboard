@@ -14,7 +14,7 @@ const Header = ({
 }) => {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   return (
-    <div className="relative flex items-center justify-between gap-4 rounded  bg-green-700 p-2 shadow sm:justify-start">
+    <div className="relative flex items-center justify-between gap-4   bg-gray-100 border border-green-500 rounded  p-2 shadow sm:justify-start">
       <div className="flex items-center gap-2 sm:hidden">
         <button
           className="btn-ghost flex rounded-full p-1"
@@ -32,7 +32,7 @@ const Header = ({
         <SearchIcon className="absolute left-1" />
         <input
           type="text"
-          className="flex-1 pl-9 text-white focus:outline-none"
+          className="flex-1 pl-9 text-gray-950  focus:outline-none "
           placeholder="Search..."
         />
       </div>
@@ -60,13 +60,13 @@ const Header = ({
         >
           <Link
             to="/settings"
-            className="flex items-center justify-start p-2 hover:bg-gray-100"
+            className="flex items-center text-gray-950  justify-start  p-2 hover:bg-green-200"
           >
             Settings
           </Link>
           <Link
             to="/logout"
-            className="flex items-center justify-start p-2 hover:bg-gray-100"
+            className="flex items-center text-gray-950  justify-start p-2 hover:bg-green-200"
           >
             Logout
           </Link>
