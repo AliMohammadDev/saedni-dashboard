@@ -27,7 +27,7 @@ const Category = () => {
     <div className="px-4 md:px-8 py-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-3xl font-bold text-green-600">Categories</h2>
+          <h2 className="text-3xl font-bold text-gray-950">Categories</h2>
           <p className="text-sm text-gray-500 mt-1">
             Manage all categories available.
           </p>
@@ -46,10 +46,11 @@ const Category = () => {
 
       <div className="relative overflow-x-auto shadow-md rounded-xl border border-green-200 bg-white">
         <table className="w-full text-sm text-left text-gray-700">
-          <thead className="text-xs uppercase bg-green-600 text-white">
+          <thead className="text-xs uppercase  text-gray-950 bg-gray-100">
             <tr>
               <th scope="col" className="px-6 py-3">Image</th>
               <th scope="col" className="px-6 py-3">Name</th>
+              <th scope="col" className="px-6 py-3">Description</th>
               <th scope="col" className="px-6 py-3">Created At</th>
               <th scope="col" className="px-6 py-3 text-right">Actions</th>
             </tr>
@@ -67,8 +68,13 @@ const Category = () => {
                     />
                   </td>
 
+
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
                     {category.name}
+                  </td>
+
+                  <td className="px-6 py-4 text-gray-600 text-sm max-w-xs break-words whitespace-normal">
+                    {category.description || <span className="italic text-gray-400">No description</span>}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-gray-600 text-sm">
                     {new Date(category.createdAt).toLocaleDateString()}

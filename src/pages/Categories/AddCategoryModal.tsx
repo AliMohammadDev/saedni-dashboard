@@ -20,7 +20,7 @@ const AddCategoryModal = () => {
     <dialog className="add-category-modal modal">
       <div className="modal-box bg-white rounded-2xl shadow-lg w-full max-w-md border border-orange-200">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-green-600">Add New Category</h3>
+          <h3 className="text-lg font-semibold text-gray-950">Add New Category</h3>
           <form method="dialog">
             <button className="text-xl text-gray-400 cursor-pointer hover:text-red-500 focus:outline-none">
               ×
@@ -30,7 +30,7 @@ const AddCategoryModal = () => {
 
         <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
           <label className="form-control w-full">
-            <span className="label-text mb-1 font-medium text-gray-700">Category Name</span>
+            <span className="label-text  font-medium text-gray-700">Name</span>
             <input
               type="text"
               placeholder="Enter category name"
@@ -42,13 +42,29 @@ const AddCategoryModal = () => {
           </label>
 
           <label className="form-control w-full">
+            <span className="label-text mb-1 font-medium text-gray-700">Description</span>
+            <textarea
+              placeholder="Enter a short description"
+              className="textarea textarea-success w-full bg-white text-gray-950"
+              rows={3}
+              {...register("description")}
+            ></textarea>
+          </label>
+
+          <label className="form-control w-full relative">
             <span className="label-text mb-1 font-medium text-gray-700">Image</span>
-            <input
-              type="file"
-              {...register("image", { required: true })}
-              accept="image/*"
-              className="file-input file-input-success  w-full file-input-bordered  text-brown-700 bg-white text-gray-950 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-400"
-            />
+
+            <div className="relative w-full">
+              <input
+                type="file"
+                {...register("image", { required: true })}
+                accept="image/*"
+                className="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full"
+              />
+              <div className="text-white text-center cursor-pointer bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5">
+                Choose Image
+              </div>
+            </div>
           </label>
 
           {error && <p className="text-sm text-error">{error.message}</p>}
@@ -56,7 +72,7 @@ const AddCategoryModal = () => {
           <div className="flex justify-end pt-2">
             <button
               type="submit"
-              className="btn btn-success shadow-md transition duration-300 ease-in-out  hover:scale-105 text-white font-semibold"
+              className="text-white cursor-pointer bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               {isLoading ? "Adding..." : "Save"}
             </button>

@@ -8,7 +8,7 @@ const DeleteIcon: FC<React.SVGProps<SVGSVGElement>> = ({ ...other }) => {
       height="24px"
       viewBox="0 -960 960 960"
       width="24px"
-      fill="green"
+      fill="red"
 
       {...other}
     >

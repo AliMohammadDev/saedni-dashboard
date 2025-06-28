@@ -33,6 +33,7 @@ export const useAddCategory = (onSuccess?: (data: CategoryResponse) => void) => 
       try {
         const formData = new FormData();
         formData.append('name', data.name);
+        formData.append('description', data.description);
         formData.append('image', data.image[0]);
         const res = await axios.post<CategoryResponse>('categories', formData, {
           headers: {
