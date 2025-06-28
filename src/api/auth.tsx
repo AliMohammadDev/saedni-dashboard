@@ -38,13 +38,24 @@ export type RegisterResponse = {
 };
 
 // get profile
+export type ProfileResponse = {
+  message: string;
+  data: {
+    id: string;
+    username: string;
+    fullName: string;
+    email: string;
+    role: string;
+  }
+};
+
 export type Profile = {
   id: string;
   username: string;
+  fullName: string;
   email: string;
   role: string;
 };
-
 
 
 export const useGetProfile = () => {
@@ -55,20 +66,14 @@ export const useGetProfile = () => {
       const token = Cookie().get("token");
       if (!token) return null;
       try {
-        const res = await axios.get<{
-          message: string; data: {
-            userId: number;
-            email: string;
-            role: string;
-            name?: string;
-          };
-        }>("auth/profile");
-        const raw = res.data.data;
+        const res = await axios.get<ProfileResponse>("auth/profile");
+        const user = res.data.data;
         const profile: Profile = {
-          id: String(raw.userId),
-          username: raw.name ?? "No Name",
-          email: raw.email,
-          role: raw.role,
+          id: String(user.id),
+          username: user.username ?? "No Name",
+          email: user.email,
+          fullName: user.fullName,
+          role: user.role,
         };
         return profile;
       } catch (err) {
