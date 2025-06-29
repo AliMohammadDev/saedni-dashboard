@@ -21,7 +21,7 @@ const DeleteCategoryModal = ({ category }: Props) => {
   return (
     <dialog className="delete-category-modal modal">
       <div className="modal-box bg-white rounded-2xl shadow-lg w-full max-w-md border border-orange-200">
-        <h3 className="text-lg font-semibold text-red-600 mb-4">Delete Item</h3>
+        <h3 className="text-lg font-semibold text-gray-950 mb-4">Delete Item</h3>
         <p className="text-gray-800 mb-4">
           Are you sure you want to delete the item{" "}
           <strong className="text-green-600">{category?.name}</strong>?

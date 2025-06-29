@@ -1,26 +1,52 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { useGetProfile, Profile } from "../../api/auth";
 import toast from "react-hot-toast";
+import { Profile, useEditProfile, useGetProfile, useGetUser } from "../../api/profile";
 
 function Setting() {
-  const { data: profile, isLoading } = useGetProfile();
+  const { data: profile, isLoading: isProfileLoading } = useGetProfile();
+  const userId = profile?.userId;
+
+  const { data: userData, isLoading: isUserLoading } = useGetUser(userId);
+
   const { register, handleSubmit, reset } = useForm<Profile>();
 
-  useEffect(() => {
-    if (profile) {
-      reset(profile);
-    }
-  }, [profile, reset]);
-
-  const onSubmit = (data: Profile) => {
-    console.log("Updated data:", data);
+  const { mutate, isLoading: isUpdating, error } = useEditProfile((data) => {
     toast.success("Profile updated successfully");
+    reset({
+      userId: data.data.userId,
+      username: data.data.username,
+      fullName: data.data.fullName,
+      email: data.data.email,
+      password: "",
+      role: data.data.role,
+    });
+  });
+  const onSubmit = (data: Profile) => {
+    const { password, ...rest } = data;
+    const payload = password ? { ...rest, password } : rest;
+    mutate(payload as Profile);
+
   };
 
-  if (isLoading) {
+  useEffect(() => {
+    if (userData) {
+      reset({
+        userId: userData.data.id,
+        username: userData.data.username,
+        fullName: userData.data.fullName,
+        email: userData.data.email,
+        password: "",
+        role: userData.data.role,
+      });
+    }
+  }, [userData, reset]);
+
+
+  if (isProfileLoading || isUserLoading) {
     return <div className="text-center mt-10 text-gray-600">Loading profile...</div>;
   }
+
 
   if (!profile) {
     return <div className="text-center mt-10 text-red-500">Failed to load profile.</div>;
@@ -37,7 +63,7 @@ function Setting() {
             <input
               type="text"
               {...register("fullName", { required: true })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
+              className="w-full px-4 py-2 border border-gray-300 text-gray-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
             />
           </div>
 
@@ -55,7 +81,18 @@ function Setting() {
             <input
               type="email"
               {...register("email")}
-              className="w-full px-4 py-2 bg-gray-100 text-gray-950 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2 border text-gray-950 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
+            />
+          </div>
+
+          <div className="col-span-1">
+            <label className="block mb-2 text-gray-700 font-medium">Password</label>
+            <input
+              type="password"
+              placeholder="********"
+              autoComplete="new-password"
+              {...register("password")}
+              className="w-full px-4 py-2 border text-gray-950 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
             />
           </div>
 
@@ -72,12 +109,19 @@ function Setting() {
           <div className="col-span-full flex justify-end mt-4">
             <button
               type="submit"
-              className="bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white font-semibold rounded-lg px-8 py-3 hover:scale-105 transition-transform shadow-md"
+              className="bg-gradient-to-r from-green-400 cursor-pointer via-green-500 to-green-600 text-white font-semibold rounded-lg px-8 py-3 hover:scale-105 transition-transform shadow-md"
             >
-              Save Changes
+              {isUpdating ? "Updating..." : "Update Profile"}
+
             </button>
           </div>
         </form>
+        {error && (
+          <p className="text-red-500 mt-4 text-sm col-span-full">
+            {error.message || "there was an error"}
+          </p>
+        )}
+
       </div>
     </div>
   );

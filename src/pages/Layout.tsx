@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import Drawer from "../components/Drawer";
 import { useEffect } from "react";
-import { useGetProfile } from "../api/auth";
+import { useGetProfile } from "../api/profile";
 
 const Layout = () => {
   const { data: profile, isLoading } = useGetProfile();
