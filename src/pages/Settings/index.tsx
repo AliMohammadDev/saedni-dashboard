@@ -26,7 +26,6 @@ function Setting() {
     const { password, ...rest } = data;
     const payload = password ? { ...rest, password } : rest;
     mutate(payload as Profile);
-
   };
 
   useEffect(() => {

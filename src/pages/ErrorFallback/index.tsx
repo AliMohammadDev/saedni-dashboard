@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const ErrorFallback = () => {
   return (
-    <section className="flex h-svh items-center bg-primary p-16 text-secondary">
+    <section className="flex h-svh items-center bg-white p-16 text-secondary">
       <div className="container mx-auto my-8 flex flex-col items-center justify-center px-5">
-        <div className="max-w-md text-center">
+        <div className="max-w-md text-center text-gray-950">
           <h2 className="mb-8 text-9xl font-extrabold">
             <span className="sr-only">Error</span>404
           </h2>
