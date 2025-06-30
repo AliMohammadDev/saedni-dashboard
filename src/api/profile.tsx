@@ -35,12 +35,14 @@ export type UserResponse = {
   }
 }
 
-export const useGetUser = (userId?: string) => {
+
+
+export const useGetUser = (id?: string) => {
   return useQuery({
-    queryKey: ["user", userId],
-    enabled: !!userId,
+    queryKey: ["user", id],
+    enabled: !!id,
     queryFn: async () => {
-      const res = await axios.get<UserResponse>(`/users/${userId}`);
+      const res = await axios.get<UserResponse>(`/users/${id}`);
       return res.data;
     },
   });
@@ -75,11 +77,11 @@ export const useGetProfile = () => {
   return query;
 };
 
-export const useEditProfile = (onSuccess?: (data: ProfileResponse) => void,
+export const useEditProfile = (onSuccess?: (data: UserResponse) => void,
   onError?: () => void,) => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation<ProfileResponse, AxiosError<{ server_error: string }>, Profile>({
+  const mutation = useMutation<UserResponse, AxiosError<{ server_error: string }>, Profile>({
     mutationFn: async (data: Profile) => {
       try {
         const payload: Partial<Profile> = {
@@ -90,7 +92,7 @@ export const useEditProfile = (onSuccess?: (data: ProfileResponse) => void,
         if (data.password) {
           payload.password = data.password;
         }
-        const res = await axios.put<ProfileResponse>(`users/${data.userId}`, payload);
+        const res = await axios.put<UserResponse>(`users/${data.userId}`, payload);
         return res.data;
       }
       catch (error) {
@@ -101,7 +103,7 @@ export const useEditProfile = (onSuccess?: (data: ProfileResponse) => void,
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["profile"] });
-      queryClient.invalidateQueries({ queryKey: ["user", data.data.userId] });
+      queryClient.invalidateQueries({ queryKey: ["user", data.data.id] });
       if (onSuccess) onSuccess(data);
     },
     onError: () => {

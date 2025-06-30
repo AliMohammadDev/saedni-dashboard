@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Profile, useEditProfile, useGetProfile, useGetUser } from "../../api/profile";
 
 function Setting() {
-  const { data: profile, isLoading: isProfileLoading } = useGetProfile();
+  const { data: profile } = useGetProfile();
   const userId = profile?.userId;
 
   const { data: userData, isLoading: isUserLoading } = useGetUser(userId);
@@ -14,7 +14,7 @@ function Setting() {
   const { mutate, isLoading: isUpdating, error } = useEditProfile((data) => {
     toast.success("Profile updated successfully");
     reset({
-      userId: data.data.userId,
+      userId: data.data.id,
       username: data.data.username,
       fullName: data.data.fullName,
       email: data.data.email,
@@ -43,7 +43,7 @@ function Setting() {
   }, [userData, reset]);
 
 
-  if (isProfileLoading || isUserLoading) {
+  if (isUserLoading) {
     return <div className="text-center mt-10 text-gray-600">Loading profile...</div>;
   }
 
