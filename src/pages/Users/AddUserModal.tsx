@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useAddUser, UserInput } from "../../api/user";
-import { useGetOrganizations } from "../../api/organization";
+import { useGetNotActiveOrganization } from "../../api/organization";
 
 const AddUserModal = () => {
-  const { data: organizations, isLoading: orgLoading, error: orgError } = useGetOrganizations();
+  const { data: organizations, isLoading: orgLoading, error: orgError } = useGetNotActiveOrganization();
   const { register, handleSubmit, reset } = useForm<UserInput>();
 
   const { mutate, isLoading, error } = useAddUser(() => {
@@ -104,7 +104,7 @@ const AddUserModal = () => {
               <span className="label-text font-medium text-gray-700">Organization</span>
               <select
                 className="select select-success cursor-pointer w-full bg-white text-gray-950"
-                {...register("organization_id", { required: true })}
+                {...register("organizationId", { required: true })}
                 defaultValue=""
               >
                 <option value="" disabled>

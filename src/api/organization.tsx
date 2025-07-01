@@ -24,6 +24,18 @@ export const useGetOrganizations = () => {
     queryFn: async () => {
       const res = await axios.get<OrganizationResponse>('organizations');
       return res.data.data;
+
+    }
+  });
+  return query;
+}
+
+export const useGetNotActiveOrganization = () => {
+  const query = useQuery({
+    queryKey: ['notActiveOrganization'],
+    queryFn: async () => {
+      const res = await axios.get<OrganizationResponse>('organizations/getNotActive');
+      return res.data.data;
     }
   });
   return query;
