@@ -41,7 +41,6 @@ const Header = ({
           if (userMenuOpened) setUserMenuOpened(false);
         }}
       >
-
         <button
           className="size-9 rounded-full bg-gray-200 transition-all hover:bg-gray-300"
           onClick={() => setUserMenuOpened((old) => !old)}
@@ -52,7 +51,6 @@ const Header = ({
             className="size-9 cursor-pointer rounded-full"
           />
         </button>
-
         <div
           className={clsx(
             "absolute -bottom-2 right-0 w-60 translate-y-full flex-col rounded-lg bg-white shadow",

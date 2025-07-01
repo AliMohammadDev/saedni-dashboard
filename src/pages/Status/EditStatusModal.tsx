@@ -8,7 +8,9 @@ type Props = {
   status: StatusInput | null;
 };
 
+
 const EditStatusModal = ({ status }: Props) => {
+  console.log(status);
   const { data: categories, isLoading: categoryLoading } = useGetCategories();
   const { register, handleSubmit, reset } = useForm<StatusInput>();
   const { mutate, isLoading, error } = useEditStatus(() => {
@@ -26,7 +28,7 @@ const EditStatusModal = ({ status }: Props) => {
       reset({
         id: status.id,
         description: status.description ?? "",
-        categoryId: status.categoryId ?? ""
+        categoryId: status.category?.id ? String(status.category.id) : ""
       });
     }
   }, [status, reset]);
@@ -66,27 +68,19 @@ const EditStatusModal = ({ status }: Props) => {
             >
               <option value="">Select category</option>
               {categories?.map((cat) => (
-                <option key={cat.id} value={cat.id}>
+                <option key={cat.id} value={String(cat.id)}>
                   {cat.name}
                 </option>
               ))}
             </select>
           </label>
-
-
           {error && <p className="text-sm text-error">{error.message}</p>}
-
           <div className="flex justify-end pt-2">
-
-
             <button
               type="submit"
               className="text-white cursor-pointer bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
               {isLoading ? "Updating..." : "Update Status"}
             </button>
-
-
-
           </div>
         </form>
       </div>
