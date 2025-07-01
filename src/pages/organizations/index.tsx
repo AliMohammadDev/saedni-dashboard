@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import AddCategoryModal from "./AddOrganizationModal";
+import AddorganizationModal from "./AddOrganizationModal";
 import DeleteIcon from "../../assets/icons/DeleteIcon";
 import EditIcon from "../../assets/icons/EditIcon";
 import Skeleton from "../../components/Skeleton";
@@ -9,7 +9,7 @@ import EditOrganizationModal from "./EditOrganizationModal";
 import DeleteOrganizationModal from "./DeleteOrganizationModal";
 
 const Organization = () => {
-  const { data: categories, isLoading, error } = useGetOrganizations();
+  const { data: organization, isLoading, error } = useGetOrganizations();
   const [selectedOrganization, setSelectedOrganization] = useState<OrganizationInput | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -17,10 +17,10 @@ const Organization = () => {
   if (isLoading) return <Skeleton />;
   if (error) return <div className="text-red-500">An error occurred while loading categories.</div>;
 
-  const totalPages = categories ? Math.ceil(categories.length / itemsPerPage) : 1;
+  const totalPages = organization ? Math.ceil(organization.length / itemsPerPage) : 1;
 
-  const paginatedCategories = categories
-    ? categories.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  const paginatedCategories = organization
+    ? organization.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     : [];
 
   return (
@@ -42,7 +42,7 @@ const Organization = () => {
         </button>
       </div>
 
-      <AddCategoryModal />
+      <AddorganizationModal />
 
       <div className="relative overflow-x-auto shadow-md rounded-xl border border-green-200 bg-white">
         <table className="w-full text-sm text-left text-gray-700">
@@ -61,52 +61,57 @@ const Organization = () => {
 
           <tbody>
             {paginatedCategories.length > 0 ? (
-              paginatedCategories.map((category) => (
-                <tr key={category.id} className="border-b border-gray-200 hover:bg-green-50 transition-all">
+              paginatedCategories.map((organization) => (
+                <tr key={organization.id} className="border-b border-gray-200 hover:bg-green-50 transition-all">
                   <td className="px-6 py-4">
-                    <img
-                      src={String(category.image)}
-                      alt={category.name}
-                      className="w-12 h-12 object-cover rounded-full border border-green-200 shadow-sm"
-                    />
-                  </td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
-                    {category.name}
+
+                    <div className="avatar">
+                      <div className="w-10 rounded-full">
+                        <img src={String(organization.image)}
+                          alt={organization.name} />
+                      </div>
+                    </div>
+
+
                   </td>
 
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
-                    {category.email}
+                    {organization.name}
                   </td>
 
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
-                    {category.phone}
+                    {organization.email}
                   </td>
 
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
-                    {category.address}
+                    {organization.phone}
+                  </td>
+
+                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
+                    {organization.address}
                   </td>
 
 
 
                   <td className="px-6 py-4 text-gray-600 text-sm max-w-xs break-words whitespace-normal">
-                    {category.description || <span className="italic text-gray-400">No description</span>}
+                    {organization.description || <span className="italic text-gray-400">No description</span>}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-gray-600 text-sm">
-                    {new Date(category.createdAt).toLocaleDateString()}
+                    {new Date(organization.createdAt).toLocaleDateString()}
                   </td>
 
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end items-center gap-3">
                       <EditIcon
                         onClick={() => {
-                          setSelectedOrganization(category);
+                          setSelectedOrganization(organization);
                           document.querySelector<HTMLDialogElement>(".edit-organization-modal")?.showModal();
                         }}
                         className="w-5 h-5 text-green-600 cursor-pointer hover:text-green-700 transition"
                       />
                       <DeleteIcon
                         onClick={() => {
-                          setSelectedOrganization(category);
+                          setSelectedOrganization(organization);
                           document.querySelector<HTMLDialogElement>(".delete-organization-modal")?.showModal();
                         }}
                         className="w-5 h-5 text-red-500 cursor-pointer hover:text-red-700 transition"

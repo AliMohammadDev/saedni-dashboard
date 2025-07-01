@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useAddUser, UserInput } from "../../api/user";
+import { useGetOrganizations } from "../../api/organization";
 
 const AddUserModal = () => {
-
+  const { data: organizations, isLoading: orgLoading, error: orgError } = useGetOrganizations();
   const { register, handleSubmit, reset } = useForm<UserInput>();
 
   const { mutate, isLoading, error } = useAddUser(() => {
@@ -95,6 +96,33 @@ const AddUserModal = () => {
 
 
 
+          <label className="form-control w-full">
+            <span className="label-text font-medium text-gray-700">Organization</span>
+            <select
+              className="select select-success cursor-pointer w-full bg-white text-gray-950"
+              {...register("organization_id", { required: true })}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                {orgLoading
+                  ? "Loading organizations..."
+                  : orgError
+                    ? "Failed to load organizations"
+                    : "Select Organization"}
+              </option>
+              {organizations?.map((org) => (
+                <option key={org.id} value={org.id}>
+                  {org.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {orgError instanceof Error && (
+            <p className="text-sm text-red-500 mt-1">
+              Error loading organizations: {orgError.message}
+            </p>
+          )}
 
           {error && <p className="text-sm text-error">{error.message}</p>}
           <div className="flex justify-end pt-2">

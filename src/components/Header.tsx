@@ -41,6 +41,7 @@ const Header = ({
           if (userMenuOpened) setUserMenuOpened(false);
         }}
       >
+
         <button
           className="size-9 rounded-full bg-gray-200 transition-all hover:bg-gray-300"
           onClick={() => setUserMenuOpened((old) => !old)}

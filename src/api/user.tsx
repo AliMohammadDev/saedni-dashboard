@@ -9,6 +9,7 @@ export type UserInput = {
   password: string;
   fullName: string;
   role: string;
+  organization_id: string;
   createdAt: string;
 }
 

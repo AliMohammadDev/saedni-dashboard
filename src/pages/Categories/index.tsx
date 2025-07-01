@@ -61,11 +61,15 @@ const Category = () => {
               paginatedCategories.map((category) => (
                 <tr key={category.id} className="border-b border-gray-200 hover:bg-green-50 transition-all">
                   <td className="px-6 py-4">
-                    <img
-                      src={String(category.image)}
-                      alt={category.name}
-                      className="w-12 h-12 object-cover rounded-full border border-green-200 shadow-sm"
-                    />
+
+
+                    <div className="avatar">
+                      <div className="w-10 rounded-full">
+                        <img src={String(category.image)}
+                          alt={category.name} />
+                      </div>
+                    </div>
+
                   </td>
 
 
