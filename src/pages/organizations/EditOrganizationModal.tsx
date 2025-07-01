@@ -38,7 +38,7 @@ const EditOrganizationModal = ({ organization }: Props) => {
 
   return (
     <dialog className="edit-organization-modal modal">
-      <div className="modal-box bg-white rounded-2xl shadow-lg w-full max-w-md border border-orange-200">
+      <div className="modal-box bg-white rounded-2xl shadow-lg w-full max-w-lg border border-orange-200">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-green-600">Update Organization</h3>
           <form method="dialog">
@@ -48,54 +48,56 @@ const EditOrganizationModal = ({ organization }: Props) => {
           </form>
         </div>
 
-        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <input type="hidden" {...register("id")} />
-          <label className="form-control w-full">
-            <span className="label-text mb-1 font-medium text-gray-700">Name</span>
-            <input
-              type="text"
-              placeholder="Enter category name"
-              className="input input-success w-full bg-white text-gray-950"
-              {...register("name")}
 
-            />
-          </label>
+          {/* صف أول: Name و Email */}
+          <div className="flex gap-4">
+            <label className="form-control w-1/2">
+              <span className="label-text mb-1 font-medium text-gray-700">Name</span>
+              <input
+                type="text"
+                placeholder="Enter category name"
+                className="input input-success w-full bg-white text-gray-950"
+                {...register("name")}
+              />
+            </label>
 
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">Email</span>
+              <input
+                type="email"
+                placeholder="example@org.com"
+                className="input input-success w-full bg-white text-gray-950"
+                {...register("email")}
+              />
+            </label>
+          </div>
 
-          <label className="form-control w-full">
-            <span className="label-text  font-medium text-gray-700">Email</span>
-            <input
-              type="email"
-              placeholder="example@org.com"
-              className="input input-success w-full bg-white text-gray-950"
-              {...register("email")}
+          {/* صف ثاني: Phone و Address */}
+          <div className="flex gap-4">
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">Phone</span>
+              <input
+                type="text"
+                placeholder="+1234567890"
+                className="input input-success w-full bg-white text-gray-950"
+                {...register("phone")}
+              />
+            </label>
 
-            />
-          </label>
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">Address</span>
+              <input
+                type="text"
+                placeholder="Enter address"
+                className="input input-success w-full bg-white text-gray-950"
+                {...register("address")}
+              />
+            </label>
+          </div>
 
-          <label className="form-control w-full">
-            <span className="label-text  font-medium text-gray-700">Phone</span>
-            <input
-              type="text"
-              placeholder="+1234567890"
-              className="input input-success w-full bg-white text-gray-950"
-              {...register("phone")}
-
-            />
-          </label>
-
-          <label className="form-control w-full">
-            <span className="label-text  font-medium text-gray-700">Address</span>
-            <input
-              type="text"
-              placeholder="Enter address"
-              className="input input-success w-full bg-white text-gray-950"
-              {...register("address")}
-
-            />
-          </label>
-
-
+          {/* صف ثالث: Description */}
           <label className="form-control w-full">
             <span className="label-text mb-1 font-medium text-gray-700">Description</span>
             <textarea
@@ -106,11 +108,9 @@ const EditOrganizationModal = ({ organization }: Props) => {
             ></textarea>
           </label>
 
-
-
+          {/* صف رابع: Image */}
           <label className="form-control w-full relative">
             <span className="label-text mb-1 font-medium text-gray-700">Image</span>
-
             <div className="relative w-full">
               <input
                 type="file"
@@ -132,18 +132,14 @@ const EditOrganizationModal = ({ organization }: Props) => {
             )}
           </label>
 
-
           {error && <p className="text-sm text-error">{error.message}</p>}
 
           <div className="flex justify-end pt-2">
-
-
             <button
               type="submit"
-              className="text-white cursor-pointer bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-
+              className="text-white cursor-pointer bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
               {isLoading ? "Updating..." : "Update Organization"}
-
             </button>
           </div>
         </form>
@@ -153,6 +149,7 @@ const EditOrganizationModal = ({ organization }: Props) => {
         <button>close</button>
       </form>
     </dialog>
+
   )
 }
 

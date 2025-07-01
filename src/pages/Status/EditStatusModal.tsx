@@ -2,16 +2,15 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { StatusInput, useEditStatus } from "../../api/status";
+import { useGetCategories } from "../../api/category";
 
 type Props = {
   status: StatusInput | null;
 };
 
-
 const EditStatusModal = ({ status }: Props) => {
-
+  const { data: categories, isLoading: categoryLoading } = useGetCategories();
   const { register, handleSubmit, reset } = useForm<StatusInput>();
-
   const { mutate, isLoading, error } = useEditStatus(() => {
     document.querySelector<HTMLDialogElement>(".edit-status-modal")?.close();
     toast.success("Status updated successfully");
@@ -27,7 +26,7 @@ const EditStatusModal = ({ status }: Props) => {
       reset({
         id: status.id,
         description: status.description ?? "",
-        categoryId: status.categoryId
+        categoryId: status.categoryId ?? ""
       });
     }
   }, [status, reset]);
@@ -44,7 +43,7 @@ const EditStatusModal = ({ status }: Props) => {
           </form>
         </div>
 
-        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
           <input type="hidden" {...register("id")} />
 
 
@@ -58,6 +57,23 @@ const EditStatusModal = ({ status }: Props) => {
             ></textarea>
           </label>
 
+          <label className="form-control w-full">
+            <span className="label-text font-medium text-gray-700">Categories</span>
+            <select
+              {...register("categoryId")}
+              className="select select-success cursor-pointer w-full bg-white text-gray-950"
+              disabled={categoryLoading}
+            >
+              <option value="">Select category</option>
+              {categories?.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
+
           {error && <p className="text-sm text-error">{error.message}</p>}
 
           <div className="flex justify-end pt-2">
@@ -66,9 +82,7 @@ const EditStatusModal = ({ status }: Props) => {
             <button
               type="submit"
               className="text-white cursor-pointer bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-
               {isLoading ? "Updating..." : "Update Status"}
-
             </button>
 
 

@@ -20,7 +20,7 @@ const AddUserModal = () => {
   };
   return (
     <dialog className="add-user-modal modal">
-      <div className="modal-box bg-white rounded-2xl shadow-lg w-full max-w-md border border-orange-200">
+      <div className="modal-box bg-white rounded-2xl shadow-lg w-full max-w-lg border border-orange-200">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-950">Add New User</h3>
           <form method="dialog">
@@ -30,93 +30,98 @@ const AddUserModal = () => {
           </form>
         </div>
 
-        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-          <label className="form-control w-full">
-            <span className="label-text  font-medium text-gray-700">User Name</span>
-            <input
-              type="text"
-              placeholder="username"
-              className="input input-success w-full bg-white text-gray-950"
-              required
-              {...register("username", { required: true })}
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+          {/* صف 1: Username و Email */}
+          <div className="flex gap-4">
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">User Name</span>
+              <input
+                type="text"
+                placeholder="username"
+                className="input input-success w-full bg-white text-gray-950"
+                required
+                {...register("username", { required: true })}
+              />
+            </label>
 
-            />
-          </label>
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">Email</span>
+              <input
+                type="email"
+                placeholder="example@gmail.com"
+                className="input input-success w-full bg-white text-gray-950"
+                required
+                {...register("email", { required: true })}
+              />
+            </label>
+          </div>
 
-          <label className="form-control w-full">
-            <span className="label-text  font-medium text-gray-700">Email</span>
-            <input
-              type="email"
-              placeholder="example@gmail.com"
-              className="input input-success w-full bg-white text-gray-950"
-              required
-              {...register("email", { required: true })}
-            />
-          </label>
+          {/* صف 2: Password و FullName */}
+          <div className="flex gap-4">
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">Password</span>
+              <input
+                type="password"
+                placeholder="********"
+                className="input input-success w-full bg-white text-gray-950"
+                autoComplete="new-password"
+                required
+                {...register("password", { required: true })}
+              />
+            </label>
 
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">FullName</span>
+              <input
+                type="text"
+                placeholder="full name"
+                className="input input-success w-full bg-white text-gray-950"
+                autoComplete="new-email"
+                required
+                {...register("fullName", { required: true })}
+              />
+            </label>
+          </div>
 
-
-          <label className="form-control w-full">
-            <span className="label-text  font-medium text-gray-700">Password</span>
-            <input
-              type="password"
-              placeholder="********"
-              className="input input-success w-full bg-white text-gray-950"
-              autoComplete="new-password"
-              required
-              {...register("password", { required: true })}
-            />
-          </label>
-
-
-          <label className="form-control w-full">
-            <span className="label-text mb-1 font-medium text-gray-700">FullName</span>
-            <input
-              type="text"
-              placeholder="full name"
-              className="input input-success w-full bg-white text-gray-950"
-              autoComplete="new-email"
-              required
-              {...register("fullName", { required: true })}
-            />
-          </label>
-
-          <label className="form-control w-full">
-            <span className="label-text mb-1 font-medium text-gray-700">Role</span>
-            <select
-              className="select cursor-pointer select-success w-full bg-white text-gray-950"
-              {...register("role", { required: true })}
-              defaultValue=""
-            >
-              <option value="" disabled>Select Role</option>
-              <option value="admin">Admin</option>
-              <option value="organization">Organization</option>
-            </select>
-          </label>
-
-
-
-          <label className="form-control w-full">
-            <span className="label-text font-medium text-gray-700">Organization</span>
-            <select
-              className="select select-success cursor-pointer w-full bg-white text-gray-950"
-              {...register("organization_id", { required: true })}
-              defaultValue=""
-            >
-              <option value="" disabled>
-                {orgLoading
-                  ? "Loading organizations..."
-                  : orgError
-                    ? "Failed to load organizations"
-                    : "Select Organization"}
-              </option>
-              {organizations?.map((org) => (
-                <option key={org.id} value={org.id}>
-                  {org.name}
+          {/* صف 3: Role و Organization */}
+          <div className="flex gap-4">
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">Role</span>
+              <select
+                className="select cursor-pointer select-success w-full bg-white text-gray-950"
+                {...register("role", { required: true })}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select Role
                 </option>
-              ))}
-            </select>
-          </label>
+                <option value="admin">Admin</option>
+                <option value="organization">Organization</option>
+              </select>
+            </label>
+
+            <label className="form-control w-1/2">
+              <span className="label-text font-medium text-gray-700">Organization</span>
+              <select
+                className="select select-success cursor-pointer w-full bg-white text-gray-950"
+                {...register("organization_id", { required: true })}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  {orgLoading
+                    ? "Loading organizations..."
+                    : orgError
+                      ? "Failed to load organizations"
+                      : "Select Organization"}
+                </option>
+                {organizations?.map((org) => (
+                  <option key={org.id} value={org.id}>
+                    {org.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
 
           {orgError instanceof Error && (
             <p className="text-sm text-red-500 mt-1">
@@ -125,6 +130,7 @@ const AddUserModal = () => {
           )}
 
           {error && <p className="text-sm text-error">{error.message}</p>}
+
           <div className="flex justify-end pt-2">
             <button
               type="submit"
@@ -135,10 +141,12 @@ const AddUserModal = () => {
           </div>
         </form>
       </div>
+
       <form method="dialog" className="modal-backdrop">
         <button>close</button>
       </form>
     </dialog>
+
   );
 };
 

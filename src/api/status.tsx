@@ -1,12 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export type StatusInput = {
   id: string;
   description: string;
-  categoryId: string;
-  organizationId?: string;
+  categoryId?: string;
+  category?: Category;
+  organizationId?: string | null;
   createdAt: string;
 }
 

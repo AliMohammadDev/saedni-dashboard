@@ -60,12 +60,10 @@ const Status = () => {
             {paginatedCategories.length > 0 ? (
               paginatedCategories.map((status) => (
                 <tr key={status.id} className="border-b border-gray-200 hover:bg-green-50 transition-all">
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
+                    {status.category?.name || <span className="italic text-gray-400">No category</span>}
                   </td>
 
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
-                    {status.categoryId}
-                  </td>
                   <td className="px-6 py-4 text-gray-600 text-sm max-w-xs break-words whitespace-normal">
                     {status.description || <span className="italic text-gray-400">No description</span>}
                   </td>

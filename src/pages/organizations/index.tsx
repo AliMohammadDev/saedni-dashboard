@@ -71,8 +71,6 @@ const Organization = () => {
                           alt={organization.name} />
                       </div>
                     </div>
-
-
                   </td>
 
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
