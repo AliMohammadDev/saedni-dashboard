@@ -29,7 +29,6 @@ const AddOrganizationModal = () => {
         </div>
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          {/* صف 1: Name و Email */}
           <div className="flex gap-4">
             <label className="form-control w-1/2">
               <span className="label-text font-medium text-gray-700">Name</span>
@@ -54,7 +53,6 @@ const AddOrganizationModal = () => {
             </label>
           </div>
 
-          {/* صف 2: Phone و Address */}
           <div className="flex gap-4">
             <label className="form-control w-1/2">
               <span className="label-text font-medium text-gray-700">Phone</span>
@@ -79,7 +77,6 @@ const AddOrganizationModal = () => {
             </label>
           </div>
 
-          {/* صف 3: Description */}
           <label className="form-control w-full">
             <span className="label-text mb-1 font-medium text-gray-700">Description</span>
             <textarea
@@ -90,7 +87,6 @@ const AddOrganizationModal = () => {
             ></textarea>
           </label>
 
-          {/* صف 4: Image */}
           <label className="form-control w-full relative">
             <span className="label-text mb-1 font-medium text-gray-700">Image</span>
 

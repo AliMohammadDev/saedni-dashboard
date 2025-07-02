@@ -7,8 +7,10 @@ import EditPersonalModal from "./EditPersonalModal";
 import DeletePersonalModal from "./DeletePersonalModal";
 import { PersonalInput, useGetPersonal } from "../../api/personal-info";
 
+
 const PersonalInfo = () => {
   const { data: personalInfos, isLoading, error } = useGetPersonal();
+
   const [selectedPersonal, setSelectedPersonal] = useState<PersonalInput | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -54,14 +56,12 @@ const PersonalInfo = () => {
               <th className="px-6 py-3">gender</th>
               <th className="px-6 py-3">birthDate</th>
               <th className="px-6 py-3">placeOfBirth</th>
-              <th className="px-6 py-3">registrationNumber</th>
               <th className="px-6 py-3">nationalId</th>
               <th className="px-6 py-3">passportNumber</th>
               <th className="px-6 py-3">maritalStatus</th>
               <th className="px-6 py-3">nationality</th>
               <th className="px-6 py-3">address</th>
               <th className="px-6 py-3">phoneNumber</th>
-              <th className="px-6 py-3">alternatePhone</th>
               <th className="px-6 py-3">statusId</th>
               <th className="px-6 py-3">createdAt</th>
               <th className="px-6 py-3 text-right">Actions</th>
@@ -82,12 +82,10 @@ const PersonalInfo = () => {
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.placeOfBirth}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.registrationNumber}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.nationalId}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.passportNumber}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.maritalStatus}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.nationality}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.address}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.phoneNumber}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.alternatePhone}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.statusId}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{/* No createdAt in type; skip or add if exists */}</td>
                   <td className="px-6 py-4 text-right">

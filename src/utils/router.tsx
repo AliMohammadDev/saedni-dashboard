@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../pages/PersonalInfos";
 import Home from "../pages/Home";
 import ErrorFallback from "../pages/ErrorFallback";
 import Register from "../pages/auth/Register";
@@ -12,6 +11,7 @@ import Setting from "../pages/Settings";
 import ForgetPassword from "../pages/auth/ForgetPassword";
 import Category from "../pages/Categories";
 import PersonalInfo from "../pages/PersonalInfos";
+import Layout from "../pages/Layout";
 
 const router = createBrowserRouter([
   {

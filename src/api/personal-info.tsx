@@ -13,12 +13,10 @@ export type PersonalInput = {
   placeOfBirth: string;
   registrationNumber: string;
   nationalId: string;
-  passportNumber: string;
   maritalStatus: 'single' | 'married' | 'divorced' | 'widowed';
   nationality: string;
   address: string;
   phoneNumber: string;
-  alternatePhone: string;
   statusId: string;
 }
 

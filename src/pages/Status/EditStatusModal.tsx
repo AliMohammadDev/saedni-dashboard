@@ -27,6 +27,7 @@ const EditStatusModal = ({ status }: Props) => {
     if (status) {
       reset({
         id: status.id,
+        name: status.name,
         description: status.description ?? "",
         categoryId: status.category?.id ? String(status.category.id) : ""
       });
@@ -47,7 +48,16 @@ const EditStatusModal = ({ status }: Props) => {
 
         <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
           <input type="hidden" {...register("id")} />
-
+          <label className="form-control col-span-1">
+            <span className="label-text font-medium text-gray-700">Status Name</span>
+            <input
+              type="text"
+              placeholder="Enter StatusName"
+              className="input input-success w-full bg-white text-gray-950"
+              required
+              {...register("name")}
+            />
+          </label>
 
           <label className="form-control w-full">
             <span className="label-text mb-1 font-medium text-gray-700">Description</span>

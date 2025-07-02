@@ -12,6 +12,7 @@ export type Category = {
 
 export type StatusInput = {
   id: string;
+  name: string;
   description: string;
   categoryId?: string;
   category?: Category;

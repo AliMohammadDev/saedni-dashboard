@@ -31,7 +31,6 @@ const AddUserModal = () => {
         </div>
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          {/* صف 1: Username و Email */}
           <div className="flex gap-4">
             <label className="form-control w-1/2">
               <span className="label-text font-medium text-gray-700">User Name</span>
@@ -56,7 +55,6 @@ const AddUserModal = () => {
             </label>
           </div>
 
-          {/* صف 2: Password و FullName */}
           <div className="flex gap-4">
             <label className="form-control w-1/2">
               <span className="label-text font-medium text-gray-700">Password</span>
@@ -83,7 +81,6 @@ const AddUserModal = () => {
             </label>
           </div>
 
-          {/* صف 3: Role و Organization */}
           <div className="flex gap-4">
             <label className="form-control w-1/2">
               <span className="label-text font-medium text-gray-700">Role</span>

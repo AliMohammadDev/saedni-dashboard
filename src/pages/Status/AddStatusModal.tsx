@@ -30,7 +30,16 @@ const AddStatusModal = () => {
 
         <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
 
-
+          <label className="form-control col-span-1">
+            <span className="label-text font-medium text-gray-700">Status Name</span>
+            <input
+              type="text"
+              placeholder="Enter StatusName"
+              className="input input-success w-full bg-white text-gray-950"
+              required
+              {...register("name", { required: true })}
+            />
+          </label>
           <label className="form-control w-full">
             <span className="label-text mb-1 font-medium text-gray-700">Description</span>
             <textarea
