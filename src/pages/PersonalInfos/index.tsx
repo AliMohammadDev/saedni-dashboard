@@ -86,8 +86,10 @@ const PersonalInfo = () => {
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.nationality}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.address}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.phoneNumber}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.statusId}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{/* No createdAt in type; skip or add if exists */}</td>
+                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.status?.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-600 text-sm">
+                    {new Date(personal.createdAt).toLocaleDateString()}
+                  </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end items-center gap-3">
                       <EditIcon

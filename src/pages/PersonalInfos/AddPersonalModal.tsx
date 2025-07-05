@@ -88,7 +88,7 @@ const AddPersonalModal = () => {
                 type="date"
                 className="input input-success w-full bg-white text-gray-950"
                 required
-                {...register("birthDate", { required: true })}
+                {...register("birthDate", { required: true, valueAsDate: true })}
               />
             </label>
             <label className="form-control col-span-1">
@@ -165,11 +165,11 @@ const AddPersonalModal = () => {
                 {...register("phoneNumber", { required: true })}
               />
             </label>
-            <label className="form-control w-1/2">
+            <label className="form-control w-full">
               <span className="label-text font-medium text-gray-700">Status</span>
               <select
                 className="select select-success cursor-pointer w-full bg-white text-gray-950"
-                {...register("statusId", { required: true })}
+                {...register("statusId", { required: true, valueAsNumber: true })}
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -186,6 +186,20 @@ const AddPersonalModal = () => {
                 ))}
               </select>
             </label>
+            <label className="form-control w-full relative">
+              <span className="label-text mb-1 font-medium text-gray-700">File</span>
+              <div className="relative w-full">
+                <input
+                  type="file"
+                  {...register("file", { required: true })}
+                  accept="image/*"
+                  className="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full"
+                />
+                <div className="text-white text-center cursor-pointer bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5">
+                  Upload File
+                </div>
+              </div>
+            </label>
           </div>
           {error && <p className="text-sm text-error">{error.message}</p>}
           <div className="flex justify-end pt-2">
@@ -198,12 +212,10 @@ const AddPersonalModal = () => {
           </div>
         </form>
       </div>
-
       <form method="dialog" className="modal-backdrop">
         <button>close</button>
       </form>
     </dialog>
-
   );
 };
 

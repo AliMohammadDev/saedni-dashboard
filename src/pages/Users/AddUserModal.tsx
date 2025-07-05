@@ -101,7 +101,7 @@ const AddUserModal = () => {
               <span className="label-text font-medium text-gray-700">Organization</span>
               <select
                 className="select select-success cursor-pointer w-full bg-white text-gray-950"
-                {...register("organizationId", { required: true })}
+                {...register("organizationId", { required: true, valueAsNumber: true })}
                 defaultValue=""
               >
                 <option value="" disabled>

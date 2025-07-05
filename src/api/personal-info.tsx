@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
+export type Status = {
+  id: string,
+  name: string,
+  description: string,
+}
 
 export type PersonalInput = {
   id: string;
@@ -17,7 +22,10 @@ export type PersonalInput = {
   nationality: string;
   address: string;
   phoneNumber: string;
-  statusId: string;
+  file: FileList;
+  statusId: number;
+  status?: Status;
+  createdAt: string;
 }
 
 export type PersonalResponse = {
@@ -41,13 +49,42 @@ export const useAddPersonal = (onSuccess?: (data: PersonalResponse) => void) => 
   const mutation = useMutation<PersonalResponse, AxiosError<{ server_error: string }>, PersonalInput>({
     mutationFn: async (data: PersonalInput) => {
       try {
-        const res = await axios.post<PersonalResponse>('personal-infos', data);
+        const formData = new FormData();
+        formData.append("firstName", data.firstName);
+        formData.append("lastName", data.lastName);
+        formData.append("fatherName", data.fatherName);
+        formData.append("motherName", data.motherName);
+        formData.append("gender", data.gender);
+        formData.append("birthDate", data.birthDate.toISOString());
+        formData.append("placeOfBirth", data.placeOfBirth);
+        formData.append("registrationNumber", data.registrationNumber);
+        formData.append("nationalId", data.nationalId);
+        formData.append("maritalStatus", data.maritalStatus);
+        formData.append("nationality", data.nationality);
+        formData.append("address", data.address);
+        formData.append("phoneNumber", data.phoneNumber);
+        formData.append("statusId", data.statusId.toString());
+
+        if (data.file && data.file.length > 0) {
+          formData.append("file", data.file[0]);
+        }
+        const res = await axios.post<PersonalResponse>(`personal-infos`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         return res.data;
+
+
       }
       catch (error) {
         const err = error as AxiosError<{ server_error: string }>;
-        const message = err.response?.data.server_error;
-        throw new Error(message || "there was an error");
+        console.error("Server Error:", err.response?.data);
+        throw new Error(
+          err.response?.data?.server_error ||
+          (typeof err.response?.data === "string" ? err.response.data : "there was an error")
+        );
+
       }
     },
     onSuccess: (data) => {
@@ -66,7 +103,33 @@ export const useEditPersonal = (onSuccess?: (data: PersonalResponse) => void,
   const mutation = useMutation<PersonalResponse, AxiosError<{ server_error: string }>, PersonalInput>({
     mutationFn: async (data: PersonalInput) => {
       try {
-        const res = await axios.put<PersonalResponse>(`personal-infos/${data.id}`, data);
+        const formData = new FormData();
+        formData.append("firstName", data.firstName);
+        formData.append("lastName", data.lastName);
+        formData.append("fatherName", data.fatherName);
+        formData.append("motherName", data.motherName);
+        formData.append("gender", data.gender);
+        formData.append("birthDate", data.birthDate.toISOString());
+        formData.append("placeOfBirth", data.placeOfBirth);
+        formData.append("registrationNumber", data.registrationNumber);
+        formData.append("nationalId", data.nationalId);
+        formData.append("maritalStatus", data.maritalStatus);
+        formData.append("nationality", data.nationality);
+        formData.append("address", data.address);
+        formData.append("phoneNumber", data.phoneNumber);
+        formData.append("statusId", data.statusId.toString());
+        if (data.file && data.file.length > 0) {
+          formData.append("image", data.file[0]);
+        }
+        const res = await axios.put<PersonalResponse>(
+          `personal-infos/${data.id}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         return res.data;
       }
       catch (error) {

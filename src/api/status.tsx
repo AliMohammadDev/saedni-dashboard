@@ -14,7 +14,7 @@ export type StatusInput = {
   id: string;
   name: string;
   description: string;
-  categoryId?: string;
+  categoryId?: number;
   category?: Category;
   organizationId?: string | null;
   createdAt: string;

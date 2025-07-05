@@ -77,7 +77,7 @@ function Register() {
               ) : (
                 <button
                   type="submit"
-                  className="mt-5 w-full rounded bg-green-600 px-6 py-3 text-white font-semibold shadow-md transition hover:scale-105 hover:bg-green-700"
+                  className="mt-5 w-full rounded cursor-pointer bg-green-600 px-6 py-3 text-white font-semibold shadow-md transition hover:scale-105 hover:bg-green-700"
                 >
                   Sign Up
                 </button>

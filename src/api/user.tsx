@@ -9,7 +9,7 @@ export type UserInput = {
   password: string;
   fullName: string;
   role: string;
-  organizationId: string;
+  organizationId: number;
   createdAt: string;
 }
 

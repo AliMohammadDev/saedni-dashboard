@@ -54,7 +54,7 @@ const AddStatusModal = () => {
             <span className="label-text font-medium text-gray-700">Categories</span>
             <select
               className="select select-success cursor-pointer w-full bg-white text-gray-950"
-              {...register("categoryId", { required: true })}
+              {...register("categoryId", { required: true, valueAsNumber: true })}
               defaultValue=""
             >
               <option value="" disabled>
