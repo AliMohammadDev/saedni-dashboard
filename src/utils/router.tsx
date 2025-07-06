@@ -12,6 +12,7 @@ import ForgetPassword from "../pages/auth/ForgetPassword";
 import Category from "../pages/Categories";
 import PersonalInfo from "../pages/PersonalInfos";
 import Layout from "../pages/Layout";
+import ShowPersonalInfo from "../pages/PersonalInfos/ShowPersonalInfo";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,16 @@ const router = createBrowserRouter([
       },
       {
         path: "personal-infos",
-        element: <PersonalInfo />,
+        children: [
+          {
+            index: true,
+            element: <PersonalInfo />,
+          },
+          {
+            path: "show/:personalId",
+            element: <ShowPersonalInfo />,
+          }
+        ]
       },
       {
         path: "organizations",

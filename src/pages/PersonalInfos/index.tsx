@@ -6,11 +6,13 @@ import AddPersonalModal from "./AddPersonalModal";
 import EditPersonalModal from "./EditPersonalModal";
 import DeletePersonalModal from "./DeletePersonalModal";
 import { PersonalInput, useGetPersonal } from "../../api/personal-info";
+import EyeIcon from "../../assets/icons/EyeIcon";
+import { useNavigate } from "react-router-dom";
 
 
 const PersonalInfo = () => {
   const { data: personalInfos, isLoading, error } = useGetPersonal();
-
+  const navigate = useNavigate();
   const [selectedPersonal, setSelectedPersonal] = useState<PersonalInput | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -51,18 +53,18 @@ const PersonalInfo = () => {
             <tr>
               <th className="px-6 py-3">firstName</th>
               <th className="px-6 py-3">lastName</th>
-              <th className="px-6 py-3">fatherName</th>
-              <th className="px-6 py-3">motherName</th>
-              <th className="px-6 py-3">gender</th>
-              <th className="px-6 py-3">birthDate</th>
-              <th className="px-6 py-3">placeOfBirth</th>
+              {/* <th className="px-6 py-3">fatherName</th> */}
+              {/* <th className="px-6 py-3">motherName</th> */}
+              {/* <th className="px-6 py-3">gender</th> */}
+              {/* <th className="px-6 py-3">birthDate</th> */}
+              {/* <th className="px-6 py-3">placeOfBirth</th> */}
               <th className="px-6 py-3">nationalId</th>
-              <th className="px-6 py-3">passportNumber</th>
-              <th className="px-6 py-3">maritalStatus</th>
-              <th className="px-6 py-3">nationality</th>
-              <th className="px-6 py-3">address</th>
+              {/* <th className="px-6 py-3">passportNumber</th> */}
+              {/* <th className="px-6 py-3">maritalStatus</th> */}
+              {/* <th className="px-6 py-3">nationality</th> */}
+              {/* <th className="px-6 py-3">address</th> */}
               <th className="px-6 py-3">phoneNumber</th>
-              <th className="px-6 py-3">statusId</th>
+              {/* <th className="px-6 py-3">statusId</th> */}
               <th className="px-6 py-3">createdAt</th>
               <th className="px-6 py-3 text-right">Actions</th>
             </tr>
@@ -75,23 +77,29 @@ const PersonalInfo = () => {
                 <tr key={personal.id} className="border-b border-gray-200 hover:bg-green-50 transition-all">
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.firstName}</td>
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.lastName}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.fatherName}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.motherName}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.gender}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{new Date(personal.birthDate).toLocaleDateString()}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.placeOfBirth}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.registrationNumber}</td>
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.fatherName}</td> */}
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.motherName}</td> */}
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.gender}</td> */}
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{new Date(personal.birthDate).toLocaleDateString()}</td> */}
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.placeOfBirth}</td> */}
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.registrationNumber}</td> */}
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.nationalId}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.maritalStatus}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.nationality}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.address}</td>
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.maritalStatus}</td> */}
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.nationality}</td> */}
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.address}</td> */}
                   <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.phoneNumber}</td>
-                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.status?.name}</td>
+                  {/* <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">{personal.status?.name}</td> */}
                   <td className="px-6 py-4 whitespace-nowrap text-gray-600 text-sm">
                     {new Date(personal.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end items-center gap-3">
+                      <EyeIcon
+                        onClick={() => {
+                          navigate(`show/${personal.id}`)
+                        }}
+                        className="w-5 h-5 text-green-600 cursor-pointer hover:text-green-700 transition"
+                      />
                       <EditIcon
                         onClick={() => {
                           setSelectedPersonal(personal);
