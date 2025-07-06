@@ -33,6 +33,10 @@ export type PersonalResponse = {
   data: PersonalInput[];
 };
 
+export type showPersonalResponse = {
+  message: string;
+  data: PersonalInput;
+}
 export const useGetPersonal = () => {
   const query = useQuery({
     queryKey: ['personal'],
@@ -43,6 +47,17 @@ export const useGetPersonal = () => {
   });
   return query;
 }
+export const useGetPerson = (id?: string) => {
+  return useQuery({
+    queryKey: ["person", id],
+    enabled: !!id,
+    queryFn: async () => {
+      const res = await axios.get<showPersonalResponse>(`/personal-infos/${id}`);
+      return res.data.data;
+    },
+  });
+};
+
 
 export const useAddPersonal = (onSuccess?: (data: PersonalResponse) => void) => {
   const queryClient = useQueryClient();
