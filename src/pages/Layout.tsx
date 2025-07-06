@@ -6,6 +6,7 @@ import Drawer from "../components/Drawer";
 const Layout = () => {
   const { data: profile, isLoading } = useGetProfile();
 
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!profile && !isLoading) {
@@ -16,7 +17,7 @@ const Layout = () => {
   return isLoading ? (
     <span>loading...</span>
   ) : (
-    <Drawer>
+    <Drawer role={profile?.role}>
       <Outlet />
     </Drawer>
   );

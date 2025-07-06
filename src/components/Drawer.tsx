@@ -19,19 +19,48 @@ type DrawerItem = {
   url: string;
   icon: ReactNode;
 };
-const items: DrawerItem[] = [
+
+const adminList: DrawerItem[] = [
   { name: "Home", url: "/", icon: <HomeIcon /> },
   { name: "Categories", url: "/categories", icon: <CategoriesIcon /> },
-  { name: "Status", url: "/status", icon: < StatusIcon/> },
+  { name: "Status", url: "/status", icon: < StatusIcon /> },
   { name: "Personal Info", url: "/personal-infos", icon: <InfoIcon /> },
   { name: "organization", url: "/organizations", icon: <OrganizationIcon /> },
   { name: "Users", url: "/users", icon: <UsersIcon /> },
   { name: "Settings", url: "/settings", icon: <SettingsIcon /> },
   { name: "Logout", url: "/logout", icon: <LogoutIcon /> },
 ];
-const Drawer = ({ children }: { children: ReactNode }) => {
+const companyList: DrawerItem[] = [
+  { name: "Home", url: "/", icon: <HomeIcon /> },
+  { name: "Status", url: "/status", icon: < StatusIcon /> },
+  { name: "Personal Info", url: "/personal-infos", icon: <InfoIcon /> },
+  { name: "Settings", url: "/settings", icon: <SettingsIcon /> },
+  { name: "Logout", url: "/logout", icon: <LogoutIcon /> },
+];
+
+
+// const items: DrawerItem[] = [
+//   { name: "Home", url: "/", icon: <HomeIcon /> },
+//   { name: "Categories", url: "/categories", icon: <CategoriesIcon /> },
+//   { name: "Status", url: "/status", icon: < StatusIcon /> },
+//   { name: "Personal Info", url: "/personal-infos", icon: <InfoIcon /> },
+//   { name: "organization", url: "/organizations", icon: <OrganizationIcon /> },
+//   { name: "Users", url: "/users", icon: <UsersIcon /> },
+//   { name: "Settings", url: "/settings", icon: <SettingsIcon /> },
+//   { name: "Logout", url: "/logout", icon: <LogoutIcon /> },
+// ];
+const Drawer = ({ children, role }: { children: ReactNode, role?: string }) => {
 
   const [drawerExpanded, setDrawerExpanded] = useState(false);
+
+  const items =
+    role === "admin"
+      ? adminList
+      : role === "organization"
+        ? companyList
+        : adminList;
+
+
   return (
     <div className="flex min-h-svh w-svw bg-gray-50">
       <div
