@@ -51,6 +51,7 @@ const User = () => {
               <th scope="col" className="px-6 py-3">Email</th>
               <th scope="col" className="px-6 py-3">FullName</th>
               <th scope="col" className="px-6 py-3">role</th>
+              <th scope="col" className="px-6 py-3">Organization</th>
               <th scope="col" className="px-6 py-3">Created At</th>
               <th scope="col" className="px-6 py-3 text-right">Actions</th>
             </tr>
@@ -84,6 +85,10 @@ const User = () => {
                     >
                       {user.role}
                     </span>
+                  </td>
+
+                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
+                    {user.organization?.name}
                   </td>
 
 

@@ -29,7 +29,7 @@ const EditStatusModal = ({ status }: Props) => {
         id: status.id,
         name: status.name,
         description: status.description ?? "",
-        categoryId: status.category?.id ? String(status.category.id) : ""
+        categoryId: status.category?.id ? status.category.id : ""
       });
     }
   }, [status, reset]);

@@ -1,7 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
-
+export type Organization = {
+  id: string,
+  name: string,
+  description: string,
+  email: string,
+  phone: string,
+  address: string,
+  image: string,
+  completed: string,
+}
 export type UserInput = {
   id: string;
   username: string;
@@ -10,6 +19,7 @@ export type UserInput = {
   fullName: string;
   role: string;
   organizationId: number;
+  organization?: Organization;
   createdAt: string;
 }
 
@@ -64,6 +74,7 @@ export const useEditUser = (onSuccess?: (data: UserResponse) => void,
           fullName: data.fullName,
           email: data.email,
           role: data.role,
+          organizationId: data.organizationId,
         };
         if (data.password) {
           payload.password = data.password;

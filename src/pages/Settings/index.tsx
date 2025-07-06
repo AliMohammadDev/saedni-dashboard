@@ -6,6 +6,7 @@ import { Profile, useEditProfile, useGetProfile, useGetUser } from "../../api/pr
 function Setting() {
   const { data: profile } = useGetProfile();
   const userId = profile?.userId;
+  const role = profile?.role;
 
   const { data: userData, isLoading: isUserLoading } = useGetUser(userId);
 
@@ -70,9 +71,12 @@ function Setting() {
             <label className="block mb-2 text-gray-700 font-medium">Username</label>
             <input
               type="text"
+              disabled={role !== "admin"}
               {...register("username", { required: true })}
-              className="w-full px-4 py-2 border text-gray-950 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
-            />
+              className={`w-full px-4 py-2 border border-gray-300
+                 text-gray-950 rounded-lg focus:outline-none focus:ring-2
+                  focus:ring-green-300 ${role !== "admin" ? "cursor-not-allowed" : ""
+                }`} />
           </div>
 
           <div className="col-span-1">

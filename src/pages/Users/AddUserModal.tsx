@@ -82,7 +82,7 @@ const AddUserModal = () => {
           </div>
 
           <div className="flex gap-4">
-            <label className="form-control w-1/2">
+            <label className="form-control w-full">
               <span className="label-text font-medium text-gray-700">Role</span>
               <select
                 className="select cursor-pointer select-success w-full bg-white text-gray-950"
@@ -97,7 +97,7 @@ const AddUserModal = () => {
               </select>
             </label>
 
-            <label className="form-control w-1/2">
+            <label className="form-control w-full">
               <span className="label-text font-medium text-gray-700">Organization</span>
               <select
                 className="select select-success cursor-pointer w-full bg-white text-gray-950"

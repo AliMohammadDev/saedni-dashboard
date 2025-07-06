@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { useEditUser, UserInput } from "../../api/user";
+import { useGetOrganizations } from "../../api/organization";
 
 type Props = {
   user: UserInput | null;
@@ -10,12 +11,15 @@ type Props = {
 
 const EditUserModal = ({ user }: Props) => {
   const { register, handleSubmit, reset } = useForm<UserInput>();
+  const { data: organizations, isLoading: orgLoading } = useGetOrganizations();
+
   const { mutate, isLoading, error } = useEditUser(() => {
     document.querySelector<HTMLDialogElement>(".edit-user-modal")?.close();
     toast.success("user updated successfully");
     reset();
   });
   const onSubmit = (data: UserInput) => {
+
     mutate(data);
   };
   useEffect(() => {
@@ -26,6 +30,7 @@ const EditUserModal = ({ user }: Props) => {
         email: user.email,
         fullName: user.fullName,
         role: user.role,
+        organizationId: user.organization?.id ? user.organization.id : ""
       });
     }
   }, [user, reset]);
@@ -45,7 +50,6 @@ const EditUserModal = ({ user }: Props) => {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <input type="hidden" {...register("id")} />
 
-          {/* صف 1: User Name و Email */}
           <div className="flex gap-4">
             <label className="form-control w-1/2">
               <span className="label-text mb-1 font-medium text-gray-700">User Name</span>
@@ -68,7 +72,6 @@ const EditUserModal = ({ user }: Props) => {
             </label>
           </div>
 
-          {/* صف 2: Password و FullName */}
           <div className="flex gap-4">
             <label className="form-control w-1/2">
               <span className="label-text mb-1 font-medium text-gray-700">Password</span>
@@ -90,22 +93,40 @@ const EditUserModal = ({ user }: Props) => {
               />
             </label>
           </div>
+          <div className="flex gap-4">
+            <label className="form-control w-full">
+              <span className="label-text font-medium text-gray-700">Organizations</span>
+              <select
+                {...register("organizationId", { valueAsNumber: true })}
 
-          {/* صف 3: Role */}
-          <label className="form-control w-full">
-            <span className="label-text mb-1 font-medium text-gray-700">Role</span>
-            <select
-              className="select cursor-pointer select-success w-full bg-white text-gray-950"
-              {...register("role")}
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Select role
-              </option>
-              <option value="admin">Admin</option>
-              <option value="organization">Organization</option>
-            </select>
-          </label>
+                className="select select-success cursor-pointer w-full bg-white text-gray-950"
+                disabled={orgLoading}
+              >
+                <option value="">Select organization</option>
+                {organizations?.map((org) => (
+                  <option key={org.id} value={String(org.id)}>
+                    {org.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+
+            <label className="form-control w-full">
+              <span className="label-text mb-1 font-medium text-gray-700">Role</span>
+              <select
+                className="select cursor-pointer select-success w-full bg-white text-gray-950"
+                {...register("role")}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select role
+                </option>
+                <option value="admin">Admin</option>
+                <option value="organization">Organization</option>
+              </select>
+            </label>
+          </div>
 
           {error && <p className="text-sm text-error">{error.message}</p>}
 
@@ -118,12 +139,12 @@ const EditUserModal = ({ user }: Props) => {
             </button>
           </div>
         </form>
-      </div>
+      </div >
 
       <form method="dialog" className="modal-backdrop">
         <button>close</button>
       </form>
-    </dialog>
+    </dialog >
 
   )
 }
