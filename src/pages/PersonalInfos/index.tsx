@@ -59,6 +59,8 @@ const PersonalInfo = () => {
               <th className="px-6 py-3 text-right">Actions</th>
             </tr>
           </thead>
+
+
           <tbody>
             {paginatedPersonalInfos.length > 0 ? (
               paginatedPersonalInfos.map((personal) => (
@@ -70,27 +72,27 @@ const PersonalInfo = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-gray-600 text-sm">
                     {new Date(personal.createdAt).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-6 py-4 text-left">
                     <div className="flex justify-end items-center gap-3">
                       <EyeIcon
                         onClick={() => {
                           navigate(`show/${personal.id}`)
                         }}
-                        className="w-5 h-5 text-green-600 cursor-pointer hover:text-green-700 transition"
+                        className="w-5 h-5 text-green-600 cursor-pointer hover:text-green-700 transition-all"
                       />
                       <EditIcon
                         onClick={() => {
                           setSelectedPersonal(personal);
                           document.querySelector<HTMLDialogElement>(".edit-personal-modal")?.showModal();
                         }}
-                        className="w-5 h-5 text-green-600 cursor-pointer hover:text-green-700 transition"
+                        className="w-5 h-5 text-green-600 cursor-pointer hover:text-green-700 transition-all"
                       />
                       <DeleteIcon
                         onClick={() => {
                           setSelectedPersonal(personal);
                           document.querySelector<HTMLDialogElement>(".delete-personal-modal")?.showModal();
                         }}
-                        className="w-5 h-5 text-red-500 cursor-pointer hover:text-red-700 transition"
+                        className="w-5 h-5 text-red-500 cursor-pointer hover:text-red-700 transition-all"
                       />
                     </div>
                   </td>

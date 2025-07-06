@@ -30,7 +30,7 @@ const EditUserModal = ({ user }: Props) => {
         email: user.email,
         fullName: user.fullName,
         role: user.role,
-        organizationId: user.organization?.id ? user.organization.id : ""
+        organizationId: user.organization?.id ? Number(user.organization.id) : 0
       });
     }
   }, [user, reset]);
