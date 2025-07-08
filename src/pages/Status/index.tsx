@@ -9,7 +9,8 @@ import DeleteStatusModal from "./DeleteStatusModal";
 
 
 const Status = () => {
-  const { data: status, isLoading, error } = useGetStatus();
+  const { data, isLoading, error } = useGetStatus();
+  const statusList = data?.data ?? [];
 
   const [selectedStatus, setSelectedStatus] = useState<StatusInput | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,10 +19,10 @@ const Status = () => {
   if (isLoading) return <Skeleton />;
   if (error) return <div className="text-red-500">An error occurred while loading status.</div>;
 
-  const totalPages = status ? Math.ceil(status.length / itemsPerPage) : 1;
+  const totalPages = statusList ? Math.ceil(statusList.length / itemsPerPage) : 1;
 
-  const paginatedCategories = status
-    ? status.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  const paginatedCategories = statusList
+    ? statusList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     : [];
 
   return (

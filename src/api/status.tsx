@@ -24,6 +24,11 @@ export type StatusInput = {
 export type StatusResponse = {
   message: string;
   data: StatusInput[];
+  total: number,
+  Statistics: {
+    countCompleted: number,
+    countNotCompleted: number
+  },
 };
 
 export const useGetStatus = () => {
@@ -31,7 +36,7 @@ export const useGetStatus = () => {
     queryKey: ['status'],
     queryFn: async () => {
       const res = await axios.get<StatusResponse>('status');
-      return res.data.data;
+      return res.data;
     }
   });
   return query;
