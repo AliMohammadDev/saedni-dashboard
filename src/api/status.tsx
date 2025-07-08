@@ -14,6 +14,7 @@ export type StatusInput = {
   id: string;
   name: string;
   description: string;
+  process: 'pending' | 'completed';
   categoryId?: number;
   category?: Category;
   organizationId?: string | null;

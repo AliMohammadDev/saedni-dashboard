@@ -51,6 +51,7 @@ const Status = () => {
             <tr>
               <th scope="col" className="px-6 py-3">Category</th>
               <th scope="col" className="px-6 py-3">Description</th>
+              <th scope="col" className="px-6 py-3">Status</th>
               <th scope="col" className="px-6 py-3">Created At</th>
               <th scope="col" className="px-6 py-3 text-right">Actions</th>
             </tr>
@@ -67,6 +68,22 @@ const Status = () => {
                   <td className="px-6 py-4 text-gray-600 text-sm max-w-xs break-words whitespace-normal">
                     {status.description || <span className="italic text-gray-400">No description</span>}
                   </td>
+                  <td className="px-6 py-4 font-medium text-gray-800 whitespace-nowrap">
+                    {status.process ? (
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-semibold
+        ${status.process === "pending"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-green-100 text-green-800"
+                          }`}
+                      >
+                        {status.process}
+                      </span>
+                    ) : (
+                      <span className="italic text-gray-400">No process</span>
+                    )}
+                  </td>
+
                   <td className="px-6 py-4 whitespace-nowrap text-gray-600 text-sm">
                     {new Date(status.createdAt).toLocaleDateString()}
                   </td>

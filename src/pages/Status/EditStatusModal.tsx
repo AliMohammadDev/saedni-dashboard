@@ -29,6 +29,7 @@ const EditStatusModal = ({ status }: Props) => {
         id: status.id,
         name: status.name,
         description: status.description ?? "",
+        process: status.process,
         categoryId: status.category?.id ? Number(status.category.id) : 0
       });
     }
@@ -84,6 +85,30 @@ const EditStatusModal = ({ status }: Props) => {
               ))}
             </select>
           </label>
+          <label className="form-control w-full">
+            <span className="label-text font-medium text-gray-700">Status</span>
+            <div className="flex gap-4 mt-1">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value="pending"
+                  {...register("process", { required: true })}
+                  className="radio radio-success"
+                />
+                <span className="text-gray-700">Pending</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value="completed"
+                  {...register("process", { required: true })}
+                  className="radio radio-success"
+                />
+                <span className="text-gray-700">Completed</span>
+              </label>
+            </div>
+          </label>
+
           {error && <p className="text-sm text-error">{error.message}</p>}
           <div className="flex justify-end pt-2">
             <button
