@@ -5,13 +5,15 @@ import { useGetStatus } from "../../api/status";
 
 const AddPersonalModal = () => {
   const { register, handleSubmit, reset } = useForm<PersonalInput>();
-  const { data: status, isLoading: statusLoading, error: statusError } = useGetStatus();
 
+  const { data, isLoading: statusLoading, error: statusError } = useGetStatus();
+  const statusList = data?.data ?? [];
   const { mutate, isLoading, error } = useAddPersonal(() => {
     document.querySelector<HTMLDialogElement>(".add-personal-modal")?.close();
     toast.success("Personal info added successfully");
     reset();
   });
+
 
   const onSubmit = (data: PersonalInput) => {
     mutate(data);
@@ -179,7 +181,7 @@ const AddPersonalModal = () => {
                       ? "Failed to load status"
                       : "Select Status"}
                 </option>
-                {status?.map((status) => (
+                {statusList?.map((status) => (
                   <option key={status.id} value={status.id}>
                     {status.name}
                   </option>

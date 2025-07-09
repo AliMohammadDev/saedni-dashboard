@@ -10,7 +10,8 @@ type Props = {
 
 const EditPersonalModal = ({ personal }: Props) => {
   const { register, handleSubmit, reset } = useForm<PersonalInput>();
-  const { data: status, isLoading: statusLoading } = useGetStatus();
+  const { data, isLoading: statusLoading } = useGetStatus();
+  const statusList = data?.data ?? [];
 
   const { mutate, isLoading, error } = useEditPersonal(() => {
     document.querySelector<HTMLDialogElement>(".edit-personal-modal")?.close();
@@ -175,7 +176,7 @@ const EditPersonalModal = ({ personal }: Props) => {
               disabled={statusLoading}
             >
               <option value="">Select status</option>
-              {status?.map((cat) => (
+              {statusList?.map((cat) => (
                 <option key={cat.id} value={String(cat.id)}>
                   {cat.name}
                 </option>
